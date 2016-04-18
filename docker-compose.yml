@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - "3000:3000"
+    container_name: nginx
+    volumes:
+      - ./www/test/:/var/www/html/
+      - ./log/nginx:/var/log/nginx
+    networks:
+      - fpm-network
+
+  fpm:
+    build: ./php-fpm/
+    container_name: php-fpm
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./www/test/:/var/www/html/
+      - ./log/php:/var/log/php
+    networks:
+      - fpm-network
+
+networks:
+  fpm-network:
