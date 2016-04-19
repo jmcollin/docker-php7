@@ -9,6 +9,7 @@ services:
     tty: true
 
   nginx:
+    restart: always
     build: ./nginx/
     ports:
       - "3000:3000"
@@ -19,6 +20,7 @@ services:
       - fpm-network
 
   fpm:
+    restart: always
     build: ./php-fpm/
     container_name: php-fpm
     ports:
