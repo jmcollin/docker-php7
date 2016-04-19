@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:1.9.14-alpine
 
 RUN rm /etc/nginx/nginx.conf
 ADD ./nginx.conf /etc/nginx/
