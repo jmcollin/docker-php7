@@ -1,14 +1,20 @@
 version: '2'
 
 services:
+  datas:
+    build: ./datas/
+    container_name: datas
+    volumes:
+      - ./www/test/:/var/www/html/
+    tty: true
+
   nginx:
     build: ./nginx/
     ports:
       - "3000:3000"
     container_name: nginx
     volumes:
-      - ./www/test/:/var/www/html/
-      - ./log/nginx:/var/log/nginx
+      - ./logs/nginx:/var/log/nginx
     networks:
       - fpm-network
 
@@ -17,9 +23,10 @@ services:
     container_name: php-fpm
     ports:
       - "9000:9000"
+    volumes_from:
+      - datas:rw
     volumes:
-      - ./www/test/:/var/www/html/
-      - ./log/php:/var/log/php
+      - ./logs/php:/var/log/php
     networks:
       - fpm-network
 
