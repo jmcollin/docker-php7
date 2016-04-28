@@ -1,4 +1,4 @@
-FROM alpine
+FROM busybox
 
 MAINTAINER Jean-Marie Collin <jmcollinfr@gmail.com>
 
